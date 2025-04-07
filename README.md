@@ -1,6 +1,17 @@
-# Django Project: Pitlane CRN Backend
+# Django Project: 🚗 Pitlane CRN Backend
 
-Ein Webanwendungsprojekt basierend auf dem Django-Framework. Dieses Projekt dient als Grundlage für die Entwicklung einer performanten, modularen und erweiterbaren Backend-Applikation mit optionalem Frontend-Anschluss (z. B. Angular oder React).
+**Pitlane** ist ein modular aufgebautes CRM-Backend, entwickelt mit Django. Es stellt die serverseitige Basis für ein Customer-Relationship-Management-System bereit – optimiert für Performance, Erweiterbarkeit und Integration mit modernen Frontends (z. B. Angular, React).
+
+---
+
+## 📦 Features
+
+- Nutzer- und Rollenverwaltung (Admin, Support, Vertrieb)
+- Kunden- und Kontaktdatenverwaltung
+- API-Schnittstellen für Frontend-Anbindung
+- Authentifizierung via JWT oder Session (anpassbar)
+- Zentrale Konfiguration mit `.env`
+- Erweiterbar um Module wie Terminplanung, Fahrzeughistorie, Angebote u.v.m.
 
 ---
 
