@@ -1,6 +1,6 @@
 # Django Project: 🚗 Pitlane CRM Backend
 
-**Pitlane** ist ein modular aufgebautes CRM-Backend, entwickelt mit Django. Es stellt die serverseitige Basis für ein Customer-Relationship-Management-System bereit – optimiert für Performance, Erweiterbarkeit und Integration mit modernen Frontends (z. B. Angular, React).
+**Pitlane** ist ein modular aufgebautes CRM-Backend, entwickelt mit Django. Es stellt die serverseitige Basis für ein Customer-Relationship-Management-System bereit – optimiert für Performance, Erweiterbarkeit und Integration mit modernen Frontends (z. B. Svelte, Angular, React).
 
 ---
 
