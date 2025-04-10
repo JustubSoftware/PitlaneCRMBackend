@@ -8,6 +8,8 @@ api = NinjaAPI()
 
 class UserOut(Schema):
     id:int
+    first_name:str
+    last_name:str
     username:str
     email:str
 
