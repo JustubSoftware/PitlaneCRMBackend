@@ -1,10 +1,11 @@
 from typing import Optional, List
-
+from pydantic import field_serializer
 from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI
 from ninja import Schema
 from ninja.responses import Response
 from django.contrib.auth.models import User
+from datetime import datetime
 
 from pitlane.models import *
 
@@ -24,178 +25,6 @@ class UserCreate(Schema):
     first_name:Optional[str] = ""
     last_name:Optional[str] = ""
 
-
-# Customer
-class CustomerOut(Schema):
-    id: int
-    first_name: str
-    last_name: str
-    email: str
-    phone: Optional[str]
-    address: str
-    date_joined: str
-
-class CustomerCreate(Schema):
-    first_name: str
-    last_name: str
-    email: str
-    phone: Optional[str]
-    address: str
-
-# Vehicle
-class VehicleOut(Schema):
-    id: int
-    brand: str
-    model: str
-    year: int
-    vin: str
-    owner_id: int  # Wichtig: owner_id, nicht owner
-
-class VehicleCreate(Schema):
-    brand: str
-    model: str
-    year: int
-    vin: str
-    owner_id: int
-
-# Mechanic
-class MechanicOut(Schema):
-    id: int
-    first_name: str
-    last_name: str
-    email: Optional[str]
-    phone: Optional[str]
-    hire_date: Optional[str]
-    is_active: bool
-
-class MechanicCreate(Schema):
-    first_name: str
-    last_name: str
-    email: Optional[str]
-    phone: Optional[str]
-    hire_date: Optional[str]
-    is_active: bool
-
-# Part
-class PartOut(Schema):
-    id: int
-    name: str
-    part_number: str
-    description: Optional[str]
-    price: float  # Decimal als float
-    stock_quantity: int
-
-class PartCreate(Schema):
-    name: str
-    part_number: str
-    description: Optional[str]
-    price: float
-    stock_quantity: int
-
-# Service
-class ServiceOut(Schema):
-    id: int
-    name: str
-    description: Optional[str]
-    price: float
-
-class ServiceCreate(Schema):
-    name: str
-    description: Optional[str]
-    price: float
-
-# Order
-class OrderOut(Schema):
-    id: int
-    customer_id: int
-    vehicle_id: int
-    mechanic_id: Optional[int]
-    order_date: str
-    description: Optional[str]
-    is_closed: bool
-
-class OrderCreate(Schema):
-    customer_id: int
-    vehicle_id: int
-    mechanic_id: Optional[int]
-    description: Optional[str]
-    is_closed: bool
-
-# OrderStatus
-class OrderStatusOut(Schema):
-    id: int
-    order_id: int
-    status: str
-    timestamp: str
-    note: Optional[str]
-
-class OrderStatusCreate(Schema):
-    order_id: int
-    status: str
-    note: Optional[str]
-
-# OrderService
-class OrderServiceOut(Schema):
-    id: int
-    order_id: int
-    service_id: int
-    quantity: int
-
-class OrderServiceCreate(Schema):
-    order_id: int
-    service_id: int
-    quantity: int
-
-# OrderPart
-class OrderPartOut(Schema):
-    id: int
-    order_id: int
-    part_id: int
-    quantity: int
-
-class OrderPartCreate(Schema):
-    order_id: int
-    part_id: int
-    quantity: int
-
-# Invoice
-class InvoiceOut(Schema):
-    id: int
-    order_id: int
-    issue_date: str
-    due_date: str
-    total_amount: float  # Decimal als float
-    is_paid: bool
-
-class InvoiceCreate(Schema):
-    order_id: int
-    due_date: str  # Format beachten
-    total_amount: float
-    is_paid: bool
-
-# Payment
-class PaymentOut(Schema):
-    id: int
-    invoice_id: int
-    payment_date: str
-    amount: float
-    payment_method: str
-    note: Optional[str]
-
-class PaymentCreate(Schema):
-    invoice_id: int
-    amount: float
-    payment_method: str
-    note: Optional[str]
-
-# Notification
-class NotificationOut(Schema):
-    id: int
-    message: str
-    timestamp: str
-
-class NotificationCreate(Schema):
-    message: str
 
 ### ENDPOINTS ###
 
@@ -241,7 +70,7 @@ class CustomerOut(Schema):
     email: str
     phone: Optional[str]
     address: str
-    date_joined: str
+    date_joined: datetime
 
 class CustomerCreate(Schema):
     first_name: str
