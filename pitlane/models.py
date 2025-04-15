@@ -29,7 +29,7 @@ class Vehicle(models.Model):
     owner = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.make} {self.model} ({self.year})"
+        return f"{self.brand} {self.model} ({self.year})"
     
 class Mechanic(models.Model):
     """Stores mechanic/employee details."""
