@@ -93,7 +93,7 @@ class VehicleOut(Schema):
     model: str
     year: int
     vin: str
-    owner_id: int
+    owner: CustomerOut
 
 class VehicleCreate(Schema):
     brand: str
