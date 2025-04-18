@@ -13,10 +13,10 @@ class CustomerAdmin(admin.ModelAdmin):
 
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
-    list_display = ("brand", "model", "year", "vin", "owner")
-    search_fields = ("brand", "model", "vin", "owner__name")
+    list_display = ("brand", "model", "year", "vin", "customer")
+    search_fields = ("brand", "model", "vin", "customer__name")
     list_filter = ("brand", "year")
-    autocomplete_fields = ("owner",)
+    autocomplete_fields = ("customer",)
 
 @admin.register(Mechanic)
 class MechanicAdmin(admin.ModelAdmin):

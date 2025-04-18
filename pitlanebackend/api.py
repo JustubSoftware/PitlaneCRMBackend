@@ -93,21 +93,21 @@ class VehicleOut(Schema):
     model: str
     year: int
     vin: str
-    owner: CustomerOut
+    customer: CustomerOut
 
 class VehicleCreate(Schema):
     brand: str
     model: str
     year: int
     vin: str
-    owner_id: int
+    customer: int
 
 class VehicleUpdate(Schema):
     brand: Optional[str] = None
     model: Optional[str] = None
     year: Optional[int] = None
     vin: Optional[str] = None
-    owner_id: Optional[int] = None
+    customer: Optional[int] = None
 
 # Mechanic
 class MechanicOut(Schema):
@@ -372,8 +372,8 @@ def create_vehicle(request, payload: VehicleCreate):
     """
     Erstellt ein neues Fahrzeug.
     """
-    owner = get_object_or_404(Customer, id=payload.owner_id)
-    vehicle = Vehicle.objects.create(owner=owner, **payload.dict(exclude={"owner_id"}))
+    customer = get_object_or_404(Customer, id=payload.customer)
+    vehicle = Vehicle.objects.create(customer=customer, **payload.dict(exclude={"customer"}))
     return Response(VehicleOut.from_orm(vehicle), status=201)
 
 @api.put("/vehicles/{vehicle_id}", response={200: VehicleOut, 404: dict})
@@ -383,11 +383,11 @@ def update_vehicle(request, vehicle_id: int, payload: VehicleUpdate):
     """
     vehicle = get_object_or_404(Vehicle, id=vehicle_id)
      # Ensure the owner exists
-    if payload.owner_id is not None:
-        owner = get_object_or_404(Customer, id=payload.owner_id)
-        vehicle.owner = owner
+    if payload.customer is not None:
+        customer = get_object_or_404(Customer, id=payload.customer)
+        vehicle.customer = customer
 
-    for attr, value in payload.dict(exclude_unset=True, exclude={"owner_id"}).items():
+    for attr, value in payload.dict(exclude_unset=True, exclude={"customer"}).items():
         setattr(vehicle, attr, value)
 
     vehicle.save()

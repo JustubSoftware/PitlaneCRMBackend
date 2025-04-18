@@ -26,7 +26,7 @@ class Vehicle(models.Model):
     model = models.CharField(max_length=150)
     year = models.IntegerField()
     vin = models.CharField(max_length=17, unique=True) # Vehicle identification Number
-    owner = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.brand} {self.model} ({self.year})"
